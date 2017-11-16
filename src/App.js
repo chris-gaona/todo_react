@@ -3,6 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  constructor() {
+    // makes sure constructor for component class extending is called
+    super();
+    this.state = {
+      todos: [
+        { id: 1, name: "Learn JSX", isComplete: true },
+        { id: 2, name: "Build an awesome app", isComplete: false },
+        { id: 3, name: "Ship It!", isComplete: false }
+      ]
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -17,9 +30,11 @@ class App extends Component {
           </form>
           <div className="Todo-List">
             <ul>
-              <li><input type="checkbox" /> Learn JSX</li>
-              <li><input type="checkbox" /> Build an awesome app</li>
-              <li><input type="checkbox" /> Ship It!</li>
+              {this.state.todos.map(todo =>
+                <li key={todo.id}>
+                  <input type="checkbox" defaultChecked={todo.isComplete} /> {todo.name}
+                </li>
+              )}
             </ul>
           </div>
         </div>
