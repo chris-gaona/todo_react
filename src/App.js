@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TodoForm from "./components/todo/TodoForm";
 
 class App extends Component {
 
@@ -14,7 +15,7 @@ class App extends Component {
         { id: 3, name: "Ship It!", isComplete: false }
       ],
       currentTodo: ""
-    }
+    };
 
     // ensures that "this" refers to correct context when executed
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -35,9 +36,11 @@ class App extends Component {
         </header>
 
         <div className="Todo-App">
-          <form>
-            <input type="text" onChange={this.handleInputChange} value={this.state.currentTodo} />
-          </form>
+
+          <TodoForm
+            handleInputChange={this.handleInputChange}
+            currentTodo={this.state.currentTodo} />
+
           <div className="Todo-List">
             <ul>
               {this.state.todos.map(todo =>
