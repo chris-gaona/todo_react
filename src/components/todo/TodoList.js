@@ -8,7 +8,7 @@ const TodoList = props => {
       <ul>
         {props.todos.map(todo =>
           // ...todo will take all key/value pairs of todo and spread them out as own props in component
-          <TodoItem key={todo.id} {...todo} />
+          <TodoItem key={todo.id} handleToggle={props.handleToggle} {...todo} />
         )}
       </ul>
     </div>
