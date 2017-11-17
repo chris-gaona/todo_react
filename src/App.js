@@ -21,6 +21,7 @@ class App extends Component {
     // ensures that "this" refers to correct context when executed
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEmptySubmit = this.handleEmptySubmit.bind(this);
   }
 
   handleInputChange(e) {
@@ -37,11 +38,23 @@ class App extends Component {
     const updatedTodos = addTodo(this.state.todos, newTodo);
     this.setState({
       todos: updatedTodos,
-      currentTodo: ""
-    })
+      currentTodo: "",
+      errorMessage: ""
+    });
+  }
+
+  handleEmptySubmit(e) {
+    e.preventDefault();
+
+    this.setState({
+      errorMessage: "Please supply a todo name"
+    });
   }
 
   render() {
+
+    const submitHandler = this.state.currentTodo ? this.handleSubmit : this.handleEmptySubmit;
+
     return (
       <div className="App">
         <header className="App-header">
@@ -51,10 +64,12 @@ class App extends Component {
 
         <div className="Todo-App">
 
+          {this.state.errorMessage && <span className="error">{this.state.errorMessage}</span> }
+
           <TodoForm
             handleInputChange={this.handleInputChange}
             currentTodo={this.state.currentTodo}
-            handleSubmit={this.handleSubmit} />
+            handleSubmit={submitHandler} />
 
           <TodoList todos={this.state.todos} />
 
