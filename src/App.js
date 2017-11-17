@@ -6,31 +6,22 @@ import {addTodo, generateId} from "./lib/todoHelpers";
 
 class App extends Component {
 
-  constructor() {
-    // makes sure constructor for component class extending is called
-    super();
-    this.state = {
-      todos: [
-        { id: 1, name: "Learn JSX", isComplete: true },
-        { id: 2, name: "Build an awesome app", isComplete: false },
-        { id: 3, name: "Ship It!", isComplete: false }
-      ],
-      currentTodo: ""
-    };
+  state = {
+    todos: [
+      { id: 1, name: "Learn JSX", isComplete: true },
+      { id: 2, name: "Build an awesome app", isComplete: false },
+      { id: 3, name: "Ship It!", isComplete: false }
+    ],
+    currentTodo: ""
+  };
 
-    // ensures that "this" refers to correct context when executed
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleEmptySubmit = this.handleEmptySubmit.bind(this);
-  }
-
-  handleInputChange(e) {
+  handleInputChange = (e) => {
     this.setState({
       currentTodo: e.target.value
     });
-  }
+  };
 
-  handleSubmit(e)  {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     const newId = generateId();
@@ -41,15 +32,15 @@ class App extends Component {
       currentTodo: "",
       errorMessage: ""
     });
-  }
+  };
 
-  handleEmptySubmit(e) {
+  handleEmptySubmit = (e) => {
     e.preventDefault();
 
     this.setState({
       errorMessage: "Please supply a todo name"
     });
-  }
+  };
 
   render() {
 
