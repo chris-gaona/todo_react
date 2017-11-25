@@ -5,7 +5,7 @@ import {TodoForm, TodoList, Footer} from "./components/todo";
 import {addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo, filterTodos} from "./lib/todoHelpers";
 import {pipe, partial} from "./lib/utils";
 import PropTypes from 'prop-types';
-import {loadTodos, createTodo} from "./lib/todoService";
+import {loadTodos, createTodo, saveTodo, deleteTodo} from "./lib/todoService";
 
 class App extends Component {
 
@@ -28,15 +28,23 @@ class App extends Component {
 
     const updateTodos = removeTodo(this.state.todos, id);
     this.setState({todos: updateTodos});
+
+    deleteTodo(id)
+      .then(() => this.showTempMessage("Todo removed"));
   };
 
   handleToggle = (id) => {
+    const getToggleTodo = pipe(findById, toggleTodo);
+    const updated = getToggleTodo(id, this.state.todos);
     // const todo = findById(id, this.state.todos);
     // const toggled = toggleTodo(todo);
     // const updatedTodos = updateTodo(this.state.todos, toggled);
-    const getUpdateTodos = pipe(findById, toggleTodo, partial(updateTodo, this.state.todos));
-    const updatedTodos = getUpdateTodos(id, this.state.todos);
+    const getUpdateTodos = partial(updateTodo, this.state.todos);
+    const updatedTodos = getUpdateTodos(updated);
     this.setState({todos: updatedTodos});
+
+    saveTodo(updated)
+      .then(() => this.showTempMessage("Todo updated"));
   };
 
   handleInputChange = (e) => {
