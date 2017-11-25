@@ -49,3 +49,17 @@ li {
 .error {
   color: red;
 }
+
+li span.Delete-Item {
+  visibility: hidden;
+}
+
+span.Delete-Item a {
+  text-decoration: none;
+  color: red;
+}
+
+li:hover span.Delete-Item {
+  visibility: visible;
+}
+

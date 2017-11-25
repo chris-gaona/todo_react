@@ -8,7 +8,11 @@ const TodoList = props => {
       <ul>
         {props.todos.map(todo =>
           // ...todo will take all key/value pairs of todo and spread them out as own props in component
-          <TodoItem key={todo.id} handleToggle={props.handleToggle} {...todo} />
+          <TodoItem
+            key={todo.id}
+            handleToggle={props.handleToggle}
+            {...todo}
+            handleRemove={props.handleRemove} />
         )}
       </ul>
     </div>
@@ -16,7 +20,9 @@ const TodoList = props => {
 };
 
 TodoList.propTypes = {
-  todos: PropTypes.array.isRequired
+  todos: PropTypes.array.isRequired,
+  handleToggle: PropTypes.func.isRequired,
+  handleRemove: PropTypes.func.isRequired,
 };
 
 export default TodoList;
