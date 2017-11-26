@@ -16,11 +16,6 @@
       "isComplete": false
     },
     {
-      "id": 4,
-      "name": "Setup fetch",
-      "isComplete": false
-    },
-    {
       "id": 78403,
       "name": "New todo",
       "isComplete": true
